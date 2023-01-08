@@ -26,8 +26,8 @@ class City {
     }
   }
   
-  const addForm = document.getElementById("addForm") as HTMLElement;
-  addForm.addEventListener("submit", (event: Event) => {
+  const form = document.getElementById("form") as HTMLElement;
+  form.addEventListener("submit", (event: Event) => {
     event.preventDefault();
     const city = (document.getElementById("city") as HTMLInputElement)
       .value;
@@ -92,7 +92,7 @@ export const isValidISBN = () => {
     }
 
 //Number 3
-function LetterChanges(str:any):any {
+function LetterChanges(str:any): any {
     var result = ""
     for(var i = 0; i < str.length; i++) {
         // handle "z"

@@ -22,8 +22,8 @@ function renderList(cityList = cities) {
         list.appendChild(li);
     }
 }
-const addForm = document.getElementById("addForm");
-addForm.addEventListener("submit", (event) => {
+const form = document.getElementById("form");
+form.addEventListener("submit", (event) => {
     event.preventDefault();
     const city = document.getElementById("city")
         .value;
