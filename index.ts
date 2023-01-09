@@ -1,27 +1,27 @@
-class City {
-    city: string;
+class Location {
+    cityMap: string;
     country: string;
     population: number;
     constructor(city: string, country: string, population: number) {
-      this.city = city;
+      this.cityMap = city;
       this.country = country;
       this.population = population;
     }
   }
   
-  const cities: City[] = JSON.parse(localStorage.getItem("cities") || "[]");
+  const destination: Location[] = JSON.parse(localStorage.getItem("cities") || "[]");
   
-  function addCity(city: City) {
-    cities.push(city);
-    localStorage.setItem("cities", JSON.stringify(cities));
+  function addCity(city: Location) {
+    destination.push(city);
+    localStorage.setItem("cities", JSON.stringify(destination));
   }
   
-  function renderList(cityList: City[] = cities) {
+  function renderList(cityList: Location[] = destination) {
     const list = document.getElementById("list") as HTMLElement;
     list.innerHTML = "";
     for (const city of cityList) {
       const li = document.createElement("li");
-      li.textContent = `${city.city}, ${city.country}, ${city.population}`;
+      li.textContent = `${city.cityMap}, ${city.country}, ${city.population}`;
       list.appendChild(li);
     }
   }
@@ -35,21 +35,21 @@ class City {
       .value;
     const population = (document.getElementById("population") as HTMLInputElement)
       .valueAsNumber;
-    addCity(new City(city, country, population));
-    renderList(cities);
+    addCity(new Location(city, country, population));
+    renderList(destination);
   });
   
   const searchInput = document.getElementById("searchInput") as HTMLInputElement;
-  searchInput.addEventListener("input", () => {
-    const searchValue = searchInput.value.toLowerCase();
-    const filteredCities = cities.filter((city) => {
-      return (
-        city.city.toLowerCase().includes(searchValue) ||
-        city.country.toLowerCase().includes(searchValue)
-      );
-    });
-    renderList(filteredCities);
+searchInput.addEventListener("input", () => {
+  const searchValue = searchInput.value.toLowerCase();
+  const filteredCities = destination.filter((city) => {
+    return (
+      city.cityMap.toLowerCase().includes(searchValue) ||
+      city.country.toLowerCase().includes(searchValue)
+    );
   });
+  renderList(filteredCities);
+});
   
   
 

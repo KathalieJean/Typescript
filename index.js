@@ -1,24 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isValidISBN = void 0;
-class City {
+class Location {
     constructor(city, country, population) {
-        this.city = city;
+        this.cityMap = city;
         this.country = country;
         this.population = population;
     }
 }
-const cities = JSON.parse(localStorage.getItem("cities") || "[]");
+const destination = JSON.parse(localStorage.getItem("cities") || "[]");
 function addCity(city) {
-    cities.push(city);
-    localStorage.setItem("cities", JSON.stringify(cities));
+    destination.push(city);
+    localStorage.setItem("cities", JSON.stringify(destination));
 }
-function renderList(cityList = cities) {
+function renderList(cityList = destination) {
     const list = document.getElementById("list");
     list.innerHTML = "";
     for (const city of cityList) {
         const li = document.createElement("li");
-        li.textContent = `${city.city}, ${city.country}, ${city.population}`;
+        li.textContent = `${city.cityMap}, ${city.country}, ${city.population}`;
         list.appendChild(li);
     }
 }
@@ -31,14 +31,14 @@ form.addEventListener("submit", (event) => {
         .value;
     const population = document.getElementById("population")
         .valueAsNumber;
-    addCity(new City(city, country, population));
-    renderList(cities);
+    addCity(new Location(city, country, population));
+    renderList(destination);
 });
 const searchInput = document.getElementById("searchInput");
 searchInput.addEventListener("input", () => {
     const searchValue = searchInput.value.toLowerCase();
-    const filteredCities = cities.filter((city) => {
-        return (city.city.toLowerCase().includes(searchValue) ||
+    const filteredCities = destination.filter((city) => {
+        return (city.cityMap.toLowerCase().includes(searchValue) ||
             city.country.toLowerCase().includes(searchValue));
     });
     renderList(filteredCities);
